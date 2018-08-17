@@ -16,7 +16,7 @@ namespace KateFordLedger.Models
         public int BankAccountNumber { get; set; }
 
         [Display(Name = "Date Opened")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTimeOffset BankAccountDateCreated { get; set; }
 
         [Display(Name = "Account Type")]

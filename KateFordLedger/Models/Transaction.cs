@@ -16,7 +16,7 @@ namespace KateFordLedger.Models
         public Guid TransactionId { get; set; }
 
         [Display(Name = "Transaction Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTimeOffset TransactionDateCreated { get; set; }
 
         [Display(Name = "Transaction Type")]
