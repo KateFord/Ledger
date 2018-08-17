@@ -1,0 +1,49 @@
+﻿@model KateFordLedger.Models.BankAccount
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Account Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BankAccountNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankAccountNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankAccountDateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankAccountDateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankAccountType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankAccountType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankAccountBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankAccountBalance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BankAccountId }) |
+    @Html.ActionLink("Back to List", "Index", "BankAccount")
+</p>

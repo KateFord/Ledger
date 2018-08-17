@@ -168,14 +168,43 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808162051310_initialCreate.cs" />
+    <Compile Include="Migrations\201808162051310_initialCreate.Designer.cs">
+      <DependentUpon>201808162051310_initialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808162055572_bankAccount.cs" />
+    <Compile Include="Migrations\201808162055572_bankAccount.Designer.cs">
+      <DependentUpon>201808162055572_bankAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808162100328_addBankAccount.cs" />
+    <Compile Include="Migrations\201808162100328_addBankAccount.Designer.cs">
+      <DependentUpon>201808162100328_addBankAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808162204576_addTransaction.cs" />
+    <Compile Include="Migrations\201808162204576_addTransaction.Designer.cs">
+      <DependentUpon>201808162204576_addTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808162220010_addFkTransactionBankBank.cs" />
+    <Compile Include="Migrations\201808162220010_addFkTransactionBankBank.Designer.cs">
+      <DependentUpon>201808162220010_addFkTransactionBankBank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808162234137_dbChanges.cs" />
+    <Compile Include="Migrations\201808162234137_dbChanges.Designer.cs">
+      <DependentUpon>201808162234137_dbChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -188,6 +217,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\KateFordLedger.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -211,8 +241,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -234,6 +262,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\BankAccount\Create.cshtml" />
+    <Content Include="Views\BankAccount\Delete.cshtml" />
+    <Content Include="Views\BankAccount\Details.cshtml" />
+    <Content Include="Views\BankAccount\Edit.cshtml" />
+    <Content Include="Views\BankAccount\Index.cshtml" />
+    <Content Include="Views\Transaction\Create.cshtml" />
+    <Content Include="Views\Transaction\Delete.cshtml" />
+    <Content Include="Views\Transaction\Details.cshtml" />
+    <Content Include="Views\Transaction\Edit.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,6 +283,26 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808162051310_initialCreate.resx">
+      <DependentUpon>201808162051310_initialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808162055572_bankAccount.resx">
+      <DependentUpon>201808162055572_bankAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808162100328_addBankAccount.resx">
+      <DependentUpon>201808162100328_addBankAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808162204576_addTransaction.resx">
+      <DependentUpon>201808162204576_addTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808162220010_addFkTransactionBankBank.resx">
+      <DependentUpon>201808162220010_addFkTransactionBankBank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808162234137_dbChanges.resx">
+      <DependentUpon>201808162234137_dbChanges.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -29,5 +29,9 @@ namespace KateFordLedger.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<KateFordLedger.Models.BankAccount> BankAccounts { get; set; }
+
+        public System.Data.Entity.DbSet<KateFordLedger.Models.Transaction> Transactions { get; set; }
     }
 }
