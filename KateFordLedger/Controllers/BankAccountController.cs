@@ -29,13 +29,13 @@ namespace KateFordLedger.Controllers
         }
 
         // GET: BankAccount/Details/5
-        public async Task<ActionResult> Details(Guid? id)
+        public async Task<ActionResult> Details(Guid? bankAccountId)
         {
-            if (id == null)
+            if (bankAccountId == null)
             {
                 return RedirectToAction("Index");
             }
-            BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
+            BankAccount bankAccount = await db.BankAccounts.FindAsync(bankAccountId);
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -78,13 +78,13 @@ namespace KateFordLedger.Controllers
         }
 
         // GET: BankAccount/Edit/5
-        public async Task<ActionResult> Edit(Guid? id)
+        public async Task<ActionResult> Edit(Guid? bankAccountId)
         {
-            if (id == null)
+            if (bankAccountId == null)
             {
                 return RedirectToAction("Index");
             }
-            BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
+            BankAccount bankAccount = await db.BankAccounts.FindAsync(bankAccountId);
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -117,13 +117,13 @@ namespace KateFordLedger.Controllers
         }
 
         // GET: BankAccount/Delete/5
-        public async Task<ActionResult> Delete(Guid? id)
+        public async Task<ActionResult> Delete(Guid? bankAccountId)
         {
-            if (id == null)
+            if (bankAccountId == null)
             {
                 return RedirectToAction("Index");
             }
-            BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
+            BankAccount bankAccount = await db.BankAccounts.FindAsync(bankAccountId);
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -134,7 +134,7 @@ namespace KateFordLedger.Controllers
         // POST: BankAccount/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(Guid id)
+        public async Task<ActionResult> DeleteConfirmed(Guid bankAccountId)
         {
             if (!ModelState.IsValid)
                 return RedirectToAction("Index");
@@ -142,7 +142,7 @@ namespace KateFordLedger.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
+                    BankAccount bankAccount = await db.BankAccounts.FindAsync(bankAccountId);
                    db.BankAccounts.Remove(bankAccount);
                    await db.SaveChangesAsync();
                 }

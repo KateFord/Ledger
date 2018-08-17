@@ -15,7 +15,7 @@ namespace KateFordLedger.Models
         [RegularExpression("^[1-9][0-9]*$", ErrorMessage = "Please enter an Account Number greater than zero")]
         public int BankAccountNumber { get; set; }
 
-        [Display(Name = "Opened On")]
+        [Display(Name = "Date Opened")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTimeOffset BankAccountDateCreated { get; set; }
 
@@ -30,9 +30,5 @@ namespace KateFordLedger.Models
         public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual ApplicationUser User { get; set; }
 
-        internal void Attach(BankAccount bankAccount)
-        {
-            throw new NotImplementedException();
-        }
-    }
+      }
 }

@@ -19,7 +19,7 @@ namespace KateFordLedger.Controllers
         {
             if (bankAccountId == null)  return Redirect("Home/Index");
            
-            // Store bank account id in session variable for crud operations
+            // Store bank account id in session variable for CRUD operations
             Session["BankAccountId"] = bankAccountId;
             var transactions = db.Transactions.Where(x => x.BankAccount.BankAccountId == bankAccountId);
             return View(await transactions.ToListAsync());
@@ -27,10 +27,10 @@ namespace KateFordLedger.Controllers
         }
 
         // GET: Transaction/Details/5
-        public async Task<ActionResult> Details(Guid? id)
+        public async Task<ActionResult> Details(Guid? transactionId)
         {
-            if (id == null)  return RedirectToAction("Index");
-            Transaction transaction = await db.Transactions.FindAsync(id);
+            if (transactionId == null)  return RedirectToAction("Index");
+            Transaction transaction = await db.Transactions.FindAsync(transactionId);
             if (transaction == null)  return HttpNotFound();
             return View(transaction);
         }
@@ -59,7 +59,7 @@ namespace KateFordLedger.Controllers
                 db.Transactions.Add(transaction);
                 await db.SaveChangesAsync();
 
-                // Update Bank Account Balance after Debit or Credit Transaction Creation
+                // Update Bank Account Balance after Debit or Credit Transaction Creation ... place code in a method!!!
                 if (transaction.TransactionType.ToString().ToLower() == "deposit")
                     transaction.BankAccount.BankAccountBalance += transaction.TransactionAmount;
                 else
@@ -78,13 +78,13 @@ namespace KateFordLedger.Controllers
         }
 
         // GET: Transaction/Edit/5
-        public async Task<ActionResult> Edit(Guid? id)
+        public async Task<ActionResult> Edit(Guid? transactionId)
         {
-            if (id == null)
+            if (transactionId == null)
             {
                 return RedirectToAction("Index");
             }
-            Transaction transaction = await db.Transactions.FindAsync(id);
+            Transaction transaction = await db.Transactions.FindAsync(transactionId);
             if (transaction == null)
             {
                 return HttpNotFound();
@@ -107,7 +107,10 @@ namespace KateFordLedger.Controllers
                  {
                     db.Entry(transaction).State = EntityState.Modified;
                     await db.SaveChangesAsync();
-                  }
+
+                    //TODO: Adjust Bank Account Balance 
+
+                }
             }
             catch (DataException)
             {
@@ -117,13 +120,13 @@ namespace KateFordLedger.Controllers
         }
 
         // GET: Transaction/Delete/5
-        public async Task<ActionResult> Delete(Guid? id)
+        public async Task<ActionResult> Delete(Guid? transactionId)
         {
-            if (id == null)
+            if (transactionId == null)
             {
                 return RedirectToAction("Index");
             }
-            Transaction transaction = await db.Transactions.FindAsync(id);
+            Transaction transaction = await db.Transactions.FindAsync(transactionId);
             if (transaction == null)
             {
                 return HttpNotFound();
@@ -134,21 +137,26 @@ namespace KateFordLedger.Controllers
         // POST: Transaction/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(Guid id)
+        public async Task<ActionResult> DeleteConfirmed(Guid transactionId)
         {
 
             if (!ModelState.IsValid)
                 return RedirectToAction("Index");
             try
             {
-                Transaction transaction = await db.Transactions.FindAsync(id);
+                Transaction transaction = await db.Transactions.FindAsync(transactionId);
                 db.Transactions.Remove(transaction);
                 await db.SaveChangesAsync();
 
-                // Update Bank Account Balance after Transaction Deletion
+                // Update Bank Account Balance after Transaction Deletion ... place code in a method!!!
                 Guid bankAccountId = (Guid)Session["bankAccountId"];
                 transaction.BankAccount = db.BankAccounts.FirstOrDefault(x => x.BankAccountId == bankAccountId);
-                transaction.BankAccount.BankAccountBalance -= transaction.TransactionAmount;
+
+                if (transaction.TransactionType.ToString().ToLower() == "deposit")
+                    transaction.BankAccount.BankAccountBalance -= transaction.TransactionAmount;
+                else
+                    transaction.BankAccount.BankAccountBalance += transaction.TransactionAmount;
+ 
                 db.Entry(transaction.BankAccount).State = EntityState.Modified;
                 await db.SaveChangesAsync();
             }
