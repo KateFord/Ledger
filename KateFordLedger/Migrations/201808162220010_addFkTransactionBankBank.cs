@@ -7,9 +7,9 @@ namespace KateFordLedger.Migrations
     {
         public override void Up()
         {
-            
+            //File will be remove
         }
-        
+
         public override void Down()
         {
             

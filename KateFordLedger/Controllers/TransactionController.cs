@@ -59,7 +59,7 @@ namespace KateFordLedger.Controllers
                 db.Transactions.Add(transaction);
                 await db.SaveChangesAsync();
 
-                // Update Bank Account Balance after Debit or Credit Transaction Creation ... place code in a method!!!
+                // Update Bank Account Balance after Debit or Credit Transaction Creation ... TODO: DIY. place code in a method and rework ... a bug!!!
                 if (transaction.TransactionType.ToString().ToLower() == "deposit")
                     transaction.BankAccount.BankAccountBalance += transaction.TransactionAmount;
                 else
@@ -148,7 +148,7 @@ namespace KateFordLedger.Controllers
                 db.Transactions.Remove(transaction);
                 await db.SaveChangesAsync();
 
-                // Update Bank Account Balance after Transaction Deletion ... place code in a method!!!
+                // Update Bank Account Balance after Transaction Deletion ... TODO: DIY. place code in a method and rework ... a bug!!!
                 Guid bankAccountId = (Guid)Session["bankAccountId"];
                 transaction.BankAccount = db.BankAccounts.FirstOrDefault(x => x.BankAccountId == bankAccountId);
 
