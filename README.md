@@ -1,6 +1,6 @@
 # Online Bank Account Ledger
 
-A simple online web application for users to log in, create mulitple bank accounts, record deposits and withdrawals and log out.
+A simple online web application for users to log in, create multiple accounts, record deposits and withdrawals and log out.
 The account balance is automatically adjusted each time a transaction is created or deleted. 
 
 Steps to run locally:
