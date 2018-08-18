@@ -22,7 +22,7 @@ namespace KateFordLedger.Controllers
                 return RedirectToAction("Index","Home");
             }
                         
-            var bankAccounts = db.BankAccounts.Where(x => x.User.Id == User.Identity.GetUserId(););
+            var bankAccounts = db.BankAccounts.Where(x => x.User.Id == User.Identity.GetUserId());
             return View(await bankAccounts.ToListAsync());
         }
 
