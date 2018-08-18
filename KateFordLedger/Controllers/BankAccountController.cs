@@ -21,11 +21,9 @@ namespace KateFordLedger.Controllers
             {
                 return RedirectToAction("Index","Home");
             }
-
-            var UserId = User.Identity.GetUserId();
-            var bankAccounts = db.BankAccounts.Where(x => x.User.Id == UserId);
+                        
+            var bankAccounts = db.BankAccounts.Where(x => x.User.Id == User.Identity.GetUserId(););
             return View(await bankAccounts.ToListAsync());
-
         }
 
         // GET: BankAccount/Details/5
@@ -62,10 +60,9 @@ namespace KateFordLedger.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    bankAccount.User = db.Users.Single(u => u.Id == User.Identity.GetUserId());
                     bankAccount.BankAccountId = Guid.NewGuid();
                     bankAccount.BankAccountDateCreated = DateTime.Today;
-                    var applicationUserId = User.Identity.GetUserId();
-                    bankAccount.User = db.Users.Single(u => u.Id == applicationUserId);
                     db.BankAccounts.Add(bankAccount);
                     await db.SaveChangesAsync();
                 }
@@ -85,7 +82,9 @@ namespace KateFordLedger.Controllers
             {
                 return RedirectToAction("Index");
             }
+
             BankAccount bankAccount = await db.BankAccounts.FindAsync(bankAccountId);
+
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -125,7 +124,9 @@ namespace KateFordLedger.Controllers
             {
                 return RedirectToAction("Index");
             }
+
             BankAccount bankAccount = await db.BankAccounts.FindAsync(bankAccountId);
+
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -144,7 +145,7 @@ namespace KateFordLedger.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    BankAccount bankAccount = await db.BankAccounts.FindAsync(bankAccountId);
+                   BankAccount bankAccount = await db.BankAccounts.FindAsync(bankAccountId);
                    db.BankAccounts.Remove(bankAccount);
                    await db.SaveChangesAsync();
                 }

@@ -18,9 +18,10 @@ namespace KateFordLedger.Controllers
         // GET: Transaction
         public async Task<ActionResult> Index(Guid? bankAccountId)
         {
-            if (bankAccountId == null)  return Redirect("Home/Index");
+            if (bankAccountId == null)
+                return Redirect("Home/Index");
            
-            // Store bank account id in session variable for CRUD operations
+            // Store bank account id in session state variable for CRUD operations
             Session["BankAccountId"] = bankAccountId;
             var transactions = db.Transactions.Where(x => x.BankAccount.BankAccountId == bankAccountId);
             return View(await transactions.ToListAsync());
@@ -30,7 +31,9 @@ namespace KateFordLedger.Controllers
         // GET: Transaction/Details/5
         public async Task<ActionResult> Details(Guid? transactionId)
         {
-            if (transactionId == null)  return RedirectToAction("Index");
+            if (transactionId == null)
+                return RedirectToAction("Index");
+
             Transaction transaction = await db.Transactions.FindAsync(transactionId);
             if (transaction == null)  return HttpNotFound();
             return View(transaction);
@@ -57,11 +60,14 @@ namespace KateFordLedger.Controllers
               {
                   transaction.TransactionId = Guid.NewGuid();
                   transaction.TransactionDateCreated = DateTime.Today;
+
                   Guid bankAccountId = (Guid)Session["bankAccountId"];
                   transaction.BankAccount = db.BankAccounts.FirstOrDefault(x => x.BankAccountId == bankAccountId);
-                  db.Transactions.Add(transaction);
+
+                   db.Transactions.Add(transaction);
                   await db.SaveChangesAsync();
 
+                  // Bank Account Balance needs adjusting when transactions are created
                   transaction.AdjustBankAccountBalance("create");
                   db.Entry(transaction.BankAccount).State = EntityState.Modified;
                   await db.SaveChangesAsync();
@@ -107,7 +113,7 @@ namespace KateFordLedger.Controllers
                     db.Entry(transaction).State = EntityState.Modified;
                     await db.SaveChangesAsync();
 
-                    //TODO: Add functionality for edited transactions 
+                    //TODO: Adjust Bank Account Balance when transactions are edited 
                    // transaction.BankAccount = transaction.BankAccount.AdjustBalance(transaction, "edit");
 
                 }
@@ -149,16 +155,13 @@ namespace KateFordLedger.Controllers
                 db.Transactions.Remove(transaction);
                 await db.SaveChangesAsync();
 
-                // Create the associated bank account object and update the account Balance 
                 Guid bankAccountId = (Guid)Session["bankAccountId"];
                 transaction.BankAccount = db.BankAccounts.FirstOrDefault(x => x.BankAccountId == bankAccountId);
+
+                // Bank Account Balance needs adjusting when transactions are deleted
                 transaction.AdjustBankAccountBalance("delete");
                 db.Entry(transaction.BankAccount).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-
-
-
-
 
             }
             catch (DataException)
