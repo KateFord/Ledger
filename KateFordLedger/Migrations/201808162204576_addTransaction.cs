@@ -18,16 +18,13 @@ namespace KateFordLedger.Migrations
                     TransactionAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
                     BankAccount_BankAccountId = c.Guid(),
                 })
-                .PrimaryKey(t => t.TransactionId)
-                .ForeignKey("dbo.BankAccounts", t => t.BankAccount_BankAccountId, cascadeDelete: true)
-                .Index(t => t.BankAccount_BankAccountId);
+                .PrimaryKey(t => t.TransactionId);
+                
         }
 
         public override void Down()
         {
-            DropForeignKey("dbo.Transactions", "BankAccount_BankAccountId", "dbo.BankAccounts");
-            DropIndex("dbo.Transactions", new[] { "BankAccount_BankAccountId" });
-            DropTable("dbo.Transactions");
+              DropTable("dbo.Transactions");
         }
     }
 }

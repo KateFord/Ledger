@@ -7,12 +7,18 @@ namespace KateFordLedger.Migrations
     {
         public override void Up()
         {
-            //File will be remove
+ 
+            AddForeignKey("dbo.Transactions", "BankAccount_BankAccountId", "dbo.BankAccounts", "bankAccountId", cascadeDelete: true);
+            CreateIndex("dbo.Transactions",  "BankAccount_BankAccountId");
+ 
         }
-
+        
         public override void Down()
         {
-            
+
+            DropForeignKey("dbo.Transactions", "BankAccount_BankAccountId", "dbo.BankAccounts");
+            DropIndex("dbo.Transactions", new[] { "BankAccount_BankAccountId" });
+ 
         }
     }
 }

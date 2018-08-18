@@ -9,7 +9,7 @@ namespace KateFordLedger.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(KateFordLedger.Models.ApplicationDbContext context)

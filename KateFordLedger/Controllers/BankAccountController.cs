@@ -70,8 +70,9 @@ namespace KateFordLedger.Controllers
                     await db.SaveChangesAsync();
                 }
             }
-            catch (DataException ex)
+            catch (DataException)
             {
+                // error handling structure only
                 ModelState.AddModelError("", "Unable to save changes.");
              }
             return RedirectToAction("Index");
@@ -111,6 +112,7 @@ namespace KateFordLedger.Controllers
             }
             catch (DataException)
             {
+                // error handling structure only
                 ModelState.AddModelError("", "Unable to save changes");
              }
             return RedirectToAction("Index");
@@ -149,6 +151,7 @@ namespace KateFordLedger.Controllers
             }
             catch (DataException)
             {
+                // error handling structure only
                 ModelState.AddModelError("", "Unable to save changes");
             }
           return RedirectToAction("Index");

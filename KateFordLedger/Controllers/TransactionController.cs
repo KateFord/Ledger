@@ -8,6 +8,7 @@ using System.Linq;
 using System.Data;
 using System.Web.Configuration;
 
+
 namespace KateFordLedger.Controllers
 {
     public class TransactionController : Controller
@@ -48,31 +49,29 @@ namespace KateFordLedger.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "TransactionId,TransactionDateCreated,TransactionType,TransactionAmount")] Transaction transaction)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return RedirectToAction("Index");
-            try
-            {
-                transaction.TransactionId = Guid.NewGuid();
-                transaction.TransactionDateCreated = DateTime.Today;
-                Guid bankAccountId = (Guid)Session["bankAccountId"];
-                transaction.BankAccount = db.BankAccounts.FirstOrDefault(x => x.BankAccountId == bankAccountId);
-                db.Transactions.Add(transaction);
-                await db.SaveChangesAsync();
 
-                // Update Bank Account Balance after Debit or Credit Transaction Creation ... TODO: DIY. place code in a method and rework ... a bug!!!
-                if (transaction.TransactionType.ToString().ToLower() == "deposit")
-                    transaction.BankAccount.BankAccountBalance += transaction.TransactionAmount;
-                else
-                    transaction.BankAccount.BankAccountBalance -= transaction.TransactionAmount;
+            if ( ModelState.IsValid)
+              try
+              {
+                  transaction.TransactionId = Guid.NewGuid();
+                  transaction.TransactionDateCreated = DateTime.Today;
+                  Guid bankAccountId = (Guid)Session["bankAccountId"];
+                  transaction.BankAccount = db.BankAccounts.FirstOrDefault(x => x.BankAccountId == bankAccountId);
+                  db.Transactions.Add(transaction);
+                  await db.SaveChangesAsync();
 
-                db.Entry(transaction.BankAccount).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-            }
+                  transaction.AdjustBankAccountBalance("create");
+                  db.Entry(transaction.BankAccount).State = EntityState.Modified;
+                  await db.SaveChangesAsync();
+              }
 
              catch (DataException)
-            {
-                ModelState.AddModelError("", "Unable to save changes.");
-            }
+              {
+                // error handling structure only
+                ModelState.AddModelError("", "Unable to save your transaction at this time. ");
+              }
 
             return RedirectToAction("Index", "Transaction", new { BankAccountId = (Guid)Session["BankAccountId"] });
         }
@@ -108,12 +107,14 @@ namespace KateFordLedger.Controllers
                     db.Entry(transaction).State = EntityState.Modified;
                     await db.SaveChangesAsync();
 
-                    //TODO: Adjust Bank Account Balance 
+                    //TODO: Add functionality for edited transactions 
+                   // transaction.BankAccount = transaction.BankAccount.AdjustBalance(transaction, "edit");
 
                 }
             }
             catch (DataException)
             {
+                // error handling structure only
                 ModelState.AddModelError("", "Unable to save changes.");
             }
             return RedirectToAction("Index", "Transaction", new { BankAccountId = (Guid)Session["BankAccountId"] });
@@ -148,20 +149,21 @@ namespace KateFordLedger.Controllers
                 db.Transactions.Remove(transaction);
                 await db.SaveChangesAsync();
 
-                // Update Bank Account Balance after Transaction Deletion ... TODO: DIY. place code in a method and rework ... a bug!!!
+                // Create the associated bank account object and update the account Balance 
                 Guid bankAccountId = (Guid)Session["bankAccountId"];
                 transaction.BankAccount = db.BankAccounts.FirstOrDefault(x => x.BankAccountId == bankAccountId);
-
-                if (transaction.TransactionType.ToString().ToLower() == "deposit")
-                    transaction.BankAccount.BankAccountBalance -= transaction.TransactionAmount;
-                else
-                    transaction.BankAccount.BankAccountBalance += transaction.TransactionAmount;
- 
+                transaction.AdjustBankAccountBalance("delete");
                 db.Entry(transaction.BankAccount).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+
+
+
+
+
             }
             catch (DataException)
             {
+                // error handling structure only
                 ModelState.AddModelError("", "Unable to save changes.");
             }
           return RedirectToAction("Index", "Transaction", new { BankAccountId = (Guid)Session["bankAccountId"] });

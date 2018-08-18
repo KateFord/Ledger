@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace KateFordLedger.Models
 {
@@ -28,6 +25,24 @@ namespace KateFordLedger.Models
         public decimal TransactionAmount { get; set; }
 
         public virtual BankAccount BankAccount { get; set; }
+
+        /// Updates bank account balance when deposits and withdrawals are are
+        /// created and deleted. 
+        public void AdjustBankAccountBalance(string action)
+        {
+            if ((action.ToLower() == "create" && this.TransactionType.ToString().ToLower() == "deposit") ||
+               (action.ToLower() == "delete" && this.TransactionType.ToString().ToLower() == "withdrawal"))
+                this.BankAccount.BankAccountBalance += this.TransactionAmount;
+
+            else if ((action.ToLower() == "create" && this.TransactionType.ToString().ToLower() == "withdrawal") ||
+            (action.ToLower() == "delete" && this.TransactionType.ToString().ToLower() == "deposit"))
+                this.BankAccount.BankAccountBalance -= this.TransactionAmount;
+
+            //TODO: Add functionality for edit
+
+            //TODO: Add error handling
+
+        }
 
     }
 
