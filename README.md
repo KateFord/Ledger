@@ -6,7 +6,7 @@ The account balance is automatically adjusted each time a transaction is created
 Steps to run locally:
 
   * Web.config
-    * Connection string: Comment out remote and uncomment LocalDb
+    * Connection string: Use LocalDb and comment out Remote
     
   * Nuget Package Manager / Package Manager Console
     * enable-migrations - Verbose
