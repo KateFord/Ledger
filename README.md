@@ -11,4 +11,6 @@ Steps to run locally:
   * Nuget Package Manager / Package Manager Console
     * enable-migrations - Verbose
     * update-database - Verbose
+    
+  * Created in Visual Studio 2015 (.NET Framework 4.6.1 MVC 5)
 
