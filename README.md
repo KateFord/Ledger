@@ -1,4 +1,4 @@
-<h1>Simple online banking Ledger</h1>
+<h1>Online banking Ledger</h1>
 
 
 <p>A simple online web application for users to log in, create multiple accounts, record deposits and withdrawals and log out. The account
