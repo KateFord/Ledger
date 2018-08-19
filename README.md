@@ -1,8 +1,7 @@
 <h1>Online Banking Ledger</h1>
 
 
-<p>A simple online web application for users to log in, create multiple accounts, record deposits and withdrawals and log out. The account
-balance is automatically adjusted each time a transaction is created or deleted.</p> 
+<p>A simple online web application for users to log in, create multiple checking and savings accounts, record deposits and withdrawals against those accounts and log out. The account balance is automatically adjusted each time a transaction is created or deleted.</p> 
  
 <p>The Ledger can be viewed here - <a href="http://katefordledger.azurewebsites.net/">Online Bank Account Ledger</a></p>
 
