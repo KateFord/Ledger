@@ -4,7 +4,7 @@
 <p>A simple online web application for users to log in, create multiple accounts, record deposits and withdrawals and log out. The account
 balance is automatically adjusted each time a transaction is created or deleted.</p>
 
-<p>This is a sample code demonstration that does not include many frontend and backend additions necessary for a usable ledger. A few tasks at hand are column sort capability, record ordering, comprehensive exception handling, realistic bank account number entry (10-12 digits), transaction description and record editing, bank account unique keys and front end design.</p>
+<p>This is a sample code demonstration that does not include many frontend and backend additions necessary for a usable ledger. A few tasks at hand are column sort capability, record ordering, comprehensive exception handling, realistic bank account number entry (10-12 digits), transaction description and record editing, bank account number on the transaction index, bank account unique keys, transaction count on the bank account index and front end design.</p>
 
 <h4>Steps to run locally:</h4>
 
