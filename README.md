@@ -2,7 +2,7 @@
 
 
 <p>A simple online web application for users to log in, create multiple accounts, record deposits and withdrawals and log out. The account
-balance is automatically adjusted each time a transaction is created or deleted. Created using Visual Studio 2015,.NET Framework 4.6.1 ASP.NET MVC 5.)</p>
+balance is automatically adjusted each time a transaction is created or deleted.</p> 
  
 <p>The Ledger can be viewed here - <a href="http://katefordledger.azurewebsites.net/">Online Bank Account Ledger</a></p>
 
@@ -25,4 +25,4 @@ balance is automatically adjusted each time a transaction is created or deleted.
    </ul>
  </ul>
     
-
+<p>Created using Visual Studio 2015,.NET Framework 4.6.1 and ASP.NET MVC 5</p>
