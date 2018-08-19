@@ -21,8 +21,9 @@ namespace KateFordLedger.Controllers
             {
                 return RedirectToAction("Index","Home");
             }
-                        
-            var bankAccounts = db.BankAccounts.Where(x => x.User.Id == User.Identity.GetUserId());
+
+            var userId = User.Identity.GetUserId();
+            var bankAccounts = db.BankAccounts.Where(x => x.User.Id == userId);
             return View(await bankAccounts.ToListAsync());
         }
 
@@ -60,7 +61,8 @@ namespace KateFordLedger.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    bankAccount.User = db.Users.Single(u => u.Id == User.Identity.GetUserId());
+                    var userId = User.Identity.GetUserId();
+                    bankAccount.User = db.Users.Single(u => u.Id == userId);
                     bankAccount.BankAccountId = Guid.NewGuid();
                     bankAccount.BankAccountDateCreated = DateTime.Today;
                     db.BankAccounts.Add(bankAccount);
