@@ -7,15 +7,8 @@
 
 <p>This is a sample code demonstration that does not include many front and backend functionality necessary for a usable ledger. A few tasks at hand are model views, column sort capability, record ordering, comprehensive exception handling, realistic bank account number entry (10-12 digits), transaction description and record editing, bank account number on the transaction index, bank account unique keys, transaction count on the bank account index and front end design.</p>
 
-<h3>Steps to run locally:</h3>
+<h3>Installing locally:</h3>
 
- <ul>
- <li>Web.config</li>
-   <ul>
-    <li>Connection string: Use LocalDb and comment out Remote</li>
-   </ul>
- </ul>
- 
  <ul>
  <li>Nuget Package Manager / Package Manager Console</li>
    <ul>
