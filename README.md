@@ -5,7 +5,7 @@
  
 <p>The Ledger can be viewed here - <a href="http://katefordledger.azurewebsites.net/">Online Bank Account Ledger</a></p>
 
-<p>This is a sample code demonstration that does not include many frontend and backend additions necessary for a usable ledger. A few tasks at hand are column sort capability, record ordering, comprehensive exception handling, realistic bank account number entry (10-12 digits), transaction description and record editing, bank account number on the transaction index, bank account unique keys, transaction count on the bank account index and front end design.</p>
+<p>This is a sample code demonstration that does not include many front and backend functionality necessary for a usable ledger. A few tasks at hand are model views, column sort capability, record ordering, comprehensive exception handling, realistic bank account number entry (10-12 digits), transaction description and record editing, bank account number on the transaction index, bank account unique keys, transaction count on the bank account index and front end design.</p>
 
 <h3>Steps to run locally:</h3>
 
